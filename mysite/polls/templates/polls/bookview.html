@@ -1,0 +1,16 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/book.css" rel="stylesheet">
+<body>
+    <h2><blockquote> 마당서점 도서목록 </blockquote></h2>
+
+	<table class="styled-table">
+        <tr><td>책번호</td><td>{{ book.bookid }}</td></tr>
+	    <tr><td>책제목</td><td>{{ book.bookname }}</td></tr>
+	    <tr><td>출판사</td><td>{{ book.publisher }}</td></tr>
+	    <tr><td>가격</td><td>{{ book.price }}</td></tr>
+	    <tr><td>재고</td><td>{{ book.stock }}</td></tr>
+	</table>
+	<a href="/polls/book" class="w-btn">목록보기</a>
+</body>
+</html>
