@@ -18,12 +18,12 @@
             {% for row in books %}
             <tr class="active-row">
 
-                <td><b><a href="/polls/bookview?id={{ row.bookid }}">{{ row.bookname }}</a></b></td>
+                <td><b><a href="/polls/bookview?id={{ row.id }}">{{ row.bookname }}</a></b></td>
                 <td>{{ row.publisher }}</td>
                 <td>{{ row.price }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="" class="w-btn">도서등록</a>
+    <a href="{% url 'postbook' %}" class="w-btn">도서등록</a>
 </html>

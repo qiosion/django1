@@ -1,0 +1,23 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/book.css" rel="stylesheet">
+<body>
+<h2>
+	<blockquote> 마당서점 도서 등록 </blockquote>
+</h2>
+
+<form method="POST" id="register" style="width: 310px;" action="{% url 'postbook' %}">
+    {% csrf_token %}
+	<input type="text" class="text" name="bookname" placeholder="Book Name"><br>
+	<input type="text" class="text" name="publisher" placeholder="Publisher"></br>
+	<input type="number" class="text" name="price" placeholder="Price"></br>
+	<input type="number" class="text" name="stock" placeholder="Stock">
+	<div>
+		<a href="{% url 'booklist' %}" class="form-btn">뒤로</a>
+
+		<input type="submit" name="register" value="입력" class="form-btn" style="float: right;">
+	</div>
+</form>
+
+</body>
+</html>
