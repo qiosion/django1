@@ -1,0 +1,18 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/book.css" rel="stylesheet">
+<body>
+<h2><blockquote> 마당서점 고객 정보</blockquote></h2>
+
+
+{% if result == True %}
+<div>성공</div>
+{% else %}
+<div>실패</div>
+{% endif %}
+
+<br><a href="{% url 'customerlist' %}" class="w-btn">뒤로</a>
+
+
+</body>
+</html>

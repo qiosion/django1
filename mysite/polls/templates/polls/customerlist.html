@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/book.css" rel="stylesheet">
+</head>
+<body>
+<h2><blockquote> 마당서점 고객목록 </blockquote></h2>
+</body>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <td>이름</td>
+            <td>주소</td>
+            <td>연락처</td>
+            <td>이메일</td>
+            <td>DELETE</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for row in customers %}
+            <tr class="active-row">
+                <td><b><a href="{% url 'customerview' row.id %}">{{ row.name }}</a></b></td>
+                <td>{{ row.address }}</td>
+                <td>{{ row.phone }}</td>
+                <td>{{ row.email }}</td>
+                <td><a href="{% url 'deletecustomer' row.id %}"><div class="delete-btn"></div></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'createcustomer' %}" class="w-btn">고객등록</a>
+</html>

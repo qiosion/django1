@@ -1,0 +1,104 @@
+
+body {
+	margin: 0 auto;
+	width: 600px;
+	padding-top: 40px;
+}
+
+.styled-table {
+	border-collapse: collapse;
+	margin-top: 20px;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 400px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+	background-color: #009879;
+	color: #ffffff;
+	text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+	padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+.styled-table a {
+	text-decoration: solid;
+}
+
+.styled-table a:hover {
+	color: orange;
+}
+
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 7px 20px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    border: 3px solid #77af9c;
+}
+
+.form-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 7px 20px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    border: 3px solid #77af9c;
+	background: #fff;
+	font-size: 15px;
+}
+
+input.text {
+    width: 300px;
+	height: 32px;
+	font-size: 15px;
+	border: 0;
+	border-radius: 15px;
+	outline: none;
+	padding-left: 10px;
+	background-color: rgb(233, 233, 233);
+	margin: 10px
+
+}
+
+.delete-btn {
+	height: 24px;
+	width: 24px;
+	margin: auto;
+	background-image: url('./delete-icon.png');
+	background-size: cover;
+	display: block;
+}

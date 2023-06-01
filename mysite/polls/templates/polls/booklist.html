@@ -1,7 +1,8 @@
+{% load static %}
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/static/book.css" rel="stylesheet">
+<link href="{% static 'polls/book.css' %}" rel="stylesheet">
 </head>
 <body>
 <h2><blockquote> 마당서점 도서목록 </blockquote></h2>
@@ -12,18 +13,19 @@
             <td>BOOKNAME</td>
             <td>PUBLISHER</td>
             <td>PRICE</td>
+            <td>DELETE</td>
         </tr>
         </thead>
         <tbody>
             {% for row in books %}
             <tr class="active-row">
-
-                <td><b><a href="/polls/bookview?id={{ row.id }}">{{ row.bookname }}</a></b></td>
+                <td><b><a href="{% url 'bookview' row.id %}">{{ row.bookname }}</a></b></td>
                 <td>{{ row.publisher }}</td>
                 <td>{{ row.price }}</td>
+                <td><a href="{% url 'deletebook' row.id %}"><div class="delete-btn"></div></a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'postbook' %}" class="w-btn">도서등록</a>
+    <a href="{% url 'createbook' %}" class="w-btn">도서등록</a>
 </html>

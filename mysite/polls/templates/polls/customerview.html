@@ -1,0 +1,17 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/book.css" rel="stylesheet">
+<body>
+    <h2><blockquote> 마당서점 고객정보 </blockquote></h2>
+
+	<table class="styled-table">
+        <tr><td>고객번호</td><td>{{ customer.id }}</td></tr>
+	    <tr><td>이름</td><td>{{ customer.name }}</td></tr>
+	    <tr><td>주소</td><td>{{ customer.address }}</td></tr>
+		<tr><td>연락처</td><td>{{ customer.phone }}</td></tr>
+	    <tr><td>이메일</td><td>{{ customer.email }}</td></tr>
+	</table>
+	<a href="{% url 'editcustomer' customer.id %}" class="w-btn">수정</a>
+	<a href="{% url 'customerlist' }" class="w-btn">목록보기</a>
+</body>
+</html>

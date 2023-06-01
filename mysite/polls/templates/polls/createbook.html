@@ -1,0 +1,17 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/polls/book.css" rel="stylesheet">
+<body>
+<h2><blockquote> 마당서점 도서 등록 </blockquote></h2>
+
+<form method="POST" id="register" style="width: 310px;" action="{% url 'createbook' %}">
+    {% csrf_token %}
+	{{form.as_p}}
+	<div>
+		<a href="{% url 'booklist' %}" class="form-btn">뒤로</a>
+		<input type="submit" name="register" value="입력" class="form-btn" style="float: right;">
+	</div>
+</form>
+
+</body>
+</html>

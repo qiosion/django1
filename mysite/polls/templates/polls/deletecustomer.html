@@ -1,0 +1,24 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/book.css" rel="stylesheet">
+<body>
+	<div class="container" style="width: 400px;">
+    <h2><blockquote> 마당서점 고객 삭제 </blockquote></h2>
+
+	<table class="styled-table">
+        <tr><td>고객번호</td><td>{{ customer.id }}</td></tr>
+	    <tr><td>이름</td><td>{{ customer.name }}</td></tr>
+	    <tr><td>주소</td><td>{{ customer.address }}</td></tr>
+	    <tr><td>연락처</td><td>{{ customer.phone }}</td></tr>
+		<tr><td>이메일</td><td>{{ customer.email }}</td></tr>
+	</table>
+
+	<form method="POST">
+		{% csrf_token %}
+		<a href="{% url 'customerlist' %}" class="w-btn">취소</a>
+		<input type="submit" name="register" value="삭제" class="form-btn" style="float: right;">
+	</form>
+
+	</div>
+</body>
+</html>

@@ -1,3 +1,5 @@
+import traceback
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db import connection
@@ -92,7 +94,32 @@ def createbook(request):
     )
 
 def editbook(request, id):
-    return HttpResponse("createbook")
+    if request.method == 'POST':
+        result = '실패'
+        book = Book.objects.get(id=id)
+        form = BookForm(request.POST, instance=book)
+        try:
+            if form.is_valid():
+                form.save()
+                result = '성공'
+            else:
+                result = form.errors
+        except:
+            result = traceback.format_exc()
+        context = {'result': result}
+        return render(
+            request,
+            'polls/postresult.html',
+            context
+        )
+    else:
+        book = Book.objects.get(id=id)
+        form = BookForm(instance=book)
+        return render(
+            request,
+            'polls/editbook.html',
+            {'form': form}
+        )
 
 def deletebook(request, id):
     return HttpResponse("createbook")
