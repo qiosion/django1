@@ -22,15 +22,26 @@ def index(request):
 # 도서목록
 def booklist(request):
     results = []
+    """
+    with connection.cursor() as cursor: # 데이터베이스 연결 및 커서 사용을 관리
+        cursor.execute("SELECT * FROM book") # sql문 실행
+        queryset = namedtuplefetchall(cursor)
+    """
+
     queryset = Book.objects.all()
     context = {'books': queryset}
     return render(request, 'polls/booklist.html', context)
 
 # table 의 컬럼 이름을 이용해서 각 record를 dictionary로 변환
-def namedtuplefetchall(cursor):
-    desc = cursor.description
+def namedtuplefetchall(cursor): # 데이터베이스에서 검색된 결과를 namedtuple 형태로 변환하여 반환하는 함수
+    desc = cursor.description # 각 컬럼의 정보를 담은 튜플들의 리스트
+
     nt_result = namedtuple("Result", [col[0] for col in desc])
+    # Result라는 이름의 namedtuple을 생성
+    # 컬럼 정보에서 컬럼명만 추출하여 필드명으로 사용
+
     return [nt_result(*row) for row in cursor.fetchall()]
+# nt_result(*row) : row에서 추출한 각 컬럼 값을 namedtuple의 필드에 매핑하여 객체를 생성
 
 # 얘는 진짜그냥 도서 제목만 보는거..
 def book(request):
@@ -122,4 +133,20 @@ def editbook(request, id):
         )
 
 def deletebook(request, id):
-    return HttpResponse("createbook")
+    if request.method == 'POST':
+        result = '실패'
+        try:
+            book = Book.objects.get(id=id)
+            book.delete()
+            result = '성공'
+        except:
+            result = traceback.format_exc()
+        context = {'result': result}
+        return render(request,
+                      'polls/postresult.html',
+                      context)
+    else:
+        book = Book.objects.get(id=id)
+        return render(request,
+                      'polls/deletebook.html',
+                      {'book': book})
