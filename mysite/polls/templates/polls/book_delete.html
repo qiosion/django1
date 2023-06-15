@@ -1,0 +1,23 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/book.css" rel="stylesheet">
+<body>
+	<div class="container" style="width: 400px;">
+    <h2><blockquote> 마당서점 도서 삭제 </blockquote></h2>
+
+	<table class="styled-table">
+        <tr><td>책번호</td><td>{{ book.id }}</td></tr>
+	    <tr><td>책제목</td><td>{{ book.bookname }}</td></tr>
+	    <tr><td>출판사</td><td>{{ book.publisher }}</td></tr>
+	    <tr><td>가격</td><td>{{ book.price }}</td></tr>=
+	</table>
+
+	<form method="POST" action="{% url 'book_delete' book.pk %}">
+		{% csrf_token %}
+		<a href="{% url 'book_list' %}" class="w-btn">취소</a>
+		<input type="submit" name="register" value="삭제" class="form-btn" style="float: right;">
+	</form>
+
+	</div>
+</body>
+</html>

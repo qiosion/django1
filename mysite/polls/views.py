@@ -5,8 +5,12 @@ from django.http import HttpResponse
 from django.db import connection
 from collections import namedtuple
 
-from .forms import BookForm
-from .models import Book
+from django.urls import reverse_lazy
+from django.views import generic
+
+from .forms import BookForm, CustomerForm
+from .models import Book, Customer
+
 
 # 인덱스페이지
 def index(request):
@@ -19,6 +23,38 @@ def index(request):
     )
 
 # 데이터베이스 연동
+# generic
+class BookListView(generic.ListView):
+    model = Book
+    template_name = "polls/book_list.html"
+    context_object_name = "books"
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = "polls/book_view.html"
+    context_object_name = "book"
+
+class BookCreateView(generic.CreateView):
+    model = Book
+    form_class = BookForm
+    template_name = "polls/book_create.html"
+    success_url = reverse_lazy("book_list")
+
+class BookUpdateView(generic.UpdateView):
+    model = Book
+    form_class = BookForm
+    template_name = "polls/book_update.html"
+    success_url = reverse_lazy("book_list")
+
+class BookDeleteView(generic.DeleteView):
+    model = Book
+    template_name = "polls/book_delete.html"
+    success_url = reverse_lazy("book_list")
+    context_object_name = "book"
+
+
+
+
 # 도서목록
 def booklist(request):
     results = []
@@ -150,3 +186,78 @@ def deletebook(request, id):
         return render(request,
                       'polls/deletebook.html',
                       {'book': book})
+
+# 고객목록
+def customerlist(request):
+    results = []
+    queryset = Customer.objects.all()
+    context = {'customers': queryset}
+    return render(request, 'polls/customerlist.html', context)
+
+# 고객조회
+def customerview(request, id):
+    customer = Customer.objects.get(id=id)
+    context = {'customer': customer}
+    return render(request, 'polls/customerview.html', context)
+
+# 장고 Form 사용
+# 고객 create, update, delete
+def createcustomer(request):
+    if request.method == 'POST':
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('customerlist')
+    form = CustomerForm()
+    return render(
+        request,
+        'polls/createcustomer.html',
+        {'form': form}
+    )
+
+def editcustomer(request, id):
+    if request.method == 'POST':
+        result = '실패'
+        customer = Customer.objects.get(id=id)
+        form = CustomerForm(request.POST, instance=customer)
+        try:
+            if form.is_valid():
+                form.save()
+                result = '성공'
+            else:
+                result = form.errors
+        except:
+            result = traceback.format_exc()
+        context = {'result': result}
+        return render(
+            request,
+            'polls/customeresult.html',
+            context
+        )
+    else:
+        customer = Customer.objects.get(id=id)
+        form = CustomerForm(instance=customer)
+        return render(
+            request,
+            'polls/editcustomer.html',
+            {'form': form}
+        )
+
+def deletecustomer(request, id):
+    if request.method == 'POST':
+        result = '실패'
+        try:
+            customer = Customer.objects.get(id=id)
+            customer.delete()
+            result = '성공'
+        except:
+            result = traceback.format_exc()
+        context = {'result': result}
+        return render(request,
+                      'polls/customeresult.html',
+                      context)
+    else:
+        customer = Customer.objects.get(id=id)
+        return render(request,
+                      'polls/deletecustomer.html',
+                      {'customer': customer})

@@ -98,7 +98,7 @@ input.text {
 	height: 24px;
 	width: 24px;
 	margin: auto;
-	background-image: url('/delete-icon.png');
+	background-image: url('./delete-icon.png');
 	background-size: cover;
 	display: block;
 }
